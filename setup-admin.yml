@@ -1,0 +1,23 @@
+- hosts: all
+  become: yes
+  tasks:
+  - name: creating an wheel group
+    group:
+      name: wheel
+      state: present
+    
+  - name: allow wheel to have passwordless
+    lineinfile:
+      dest: /etc/sudoers
+      state: present
+      regexp: '^%wheel'
+      line: '^%wheel ALL=(ALL) NOPASSWD: ALL'
+      validate: 'visudo -cf %s'
+
+  - name: add sudoers users to wheel group
+    user: name=admin groups=wheel append=yes state=present createhome=yes
+
+  - name: setup ssh keys
+    authorized_key: user=admin key="{{item}}"
+    with_file:
+      - /home/eclesio/.ssh/generics/id_rsa.pub

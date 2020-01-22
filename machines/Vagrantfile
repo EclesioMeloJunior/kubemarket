@@ -1,0 +1,8 @@
+Vagrant.configure("2") do |config|
+	(1..3).each do |machine|
+		config.vm.define "node-#{machine}" do |node|
+                	node.vm.box = "ubuntu/xenial64"
+                	node.vm.network "private_network", type: "dhcp"
+        	end
+	end
+end
