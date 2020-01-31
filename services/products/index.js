@@ -1,6 +1,6 @@
 const logger = require('./src/lib/logger');
 const server = require('./src/server');
-const databaseConnect = require('./src/infra/database').connect;
+const Database = require('./src/infra/database');
 
 const {
   application,
@@ -17,4 +17,4 @@ function startServer() {
   });
 }
 
-databaseConnect().then(startServer);
+Database.connect().then(startServer);
