@@ -7,8 +7,6 @@ const application = {
   serviceName: process.env.SERVICE_NAME,
 };
 
-console.log(application);
-
 const configurations = {
   environment,
   isDevelopment,
