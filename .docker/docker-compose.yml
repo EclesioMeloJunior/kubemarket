@@ -4,8 +4,31 @@ services:
   mongo-products:
     image: mongo
     restart: always
+    networks:
+      - products
     ports:
       - '27017:27017'
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=example
+  
+  products-service:
+    image: warclusterstg/products:v1.0.1
+    restart: always
+    networks:
+      - products
+    links:
+      - mongo-products
+    ports:
+      - '8087:80'
+    environment:
+      - SERVICE_NAME=products
+      - MONGODB_HOST=mongo-products
+      - MONGODB_PORT=27017
+      - MONGODB_DATABASE=admin
+      - MONGODB_USER=root
+      - MONGODB_PASSWORD=example
+
+networks:
+  products:
+    driver: bridge
