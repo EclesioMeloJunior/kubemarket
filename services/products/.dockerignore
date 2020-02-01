@@ -1,0 +1,7 @@
+.dockerignore
+.editorignore
+.env
+.env.example
+.eslint.json
+.gitignore
+node_modules/
