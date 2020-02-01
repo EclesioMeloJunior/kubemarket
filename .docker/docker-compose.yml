@@ -20,7 +20,7 @@ services:
     links:
       - mongo-products
     ports:
-      - '8087:80'
+      - '8087:8080'
     environment:
       - SERVICE_NAME=products
       - MONGODB_HOST=mongo-products
